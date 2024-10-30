@@ -1,0 +1,2 @@
+gcc main.c arg_validaion.c exeption_handling.c fractol_init.c ../lib/libft/ft_isdigit.c ../lib/libft/ft_atof.c ../lib/libft/ft_strcmp.c ../lib/libft/ft_putstr_fd.c ../lib/libft/ft_putendl_fd.c MLX42/build/libmlx42.a -IMLX42/include -ldl -lglfw -pthread -lm
+
