@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:54:46 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/03 06:08:44 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/03 07:15:08 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ void	get_color(t_color *pix, int n)
 	if (n == MAX_ITER)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
-		return;
+		return ;
 	}
-
-	pix -> r  = (uint32_t)(sin(n)/ 1 * 127.5 + 127.5);
-	pix -> g = (uint32_t)(sin(n + M_PI /3) / 2 * 127.5 + 127.5);
-	pix -> b = (uint32_t)(sin(n + 2 * M_PI / 3)/ 3 * 127.5 + 127.5);
+	pix -> r = (uint32_t)(sin(n) / 1 * 127.5 + 127.5);
+	pix -> g = (uint32_t)(sin(n + M_PI / 3) / 2 * 127.5 + 127.5);
+	pix -> b = (uint32_t)(sin(n + 2 * M_PI / 3) / 3 * 127.5 + 127.5);
 	pix -> a = 255;
 	pix -> color = get_pixel(pix -> r, pix -> g, pix -> b, pix -> a);
 }

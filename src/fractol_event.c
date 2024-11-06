@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_events.c                                   :+:      :+:    :+:   */
+/*   fractol_event.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:12:55 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/10/30 20:11:07 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/03 07:10:24 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 void	esc(mlx_key_data_t keydata, void *param)
 {
@@ -25,7 +24,7 @@ void	esc(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void zoom(double xdelta, double ydelta, void* param)
+void	zoom(double xdelta, double ydelta, void *param)
 {
 	int32_t		pix_x;
 	int32_t		pix_y;
@@ -36,13 +35,13 @@ void zoom(double xdelta, double ydelta, void* param)
 	(void)xdelta;
 	frac = (t_fractol *)param;
 	mlx_get_mouse_pos(frac -> mlx, &pix_x, &pix_y);
-	pix_to_cmplex(pix_x, pix_y, &mouse, frac -> min, frac -> max);
+	pix_to_cmplex(pix_x, pix_y, &mouse, frac);
 	if (ydelta > 0)
 		zoom_fac = 0.9;
 	else if (ydelta < 0)
 		zoom_fac = 1.1;
 	else
-		return;
+		return ;
 	frac -> min.x = mouse.x + (frac -> min.x - mouse.x) * zoom_fac;
 	frac -> max.x = mouse.x + (frac -> max.x - mouse.x) * zoom_fac;
 	frac -> min.y = mouse.y + (frac -> min.y - mouse.y) * zoom_fac;
@@ -50,38 +49,30 @@ void zoom(double xdelta, double ydelta, void* param)
 	fractol_render(&(*frac));
 }
 
-void shift(void* param)
+void	shift(void *param)
 {
-	double		shift_fac;
+	double		x_shift_fac;
+	double		y_shift_fac;
 	double		xrange;
 	double		yrange;
 	t_fractol	*frac;
 
 	frac = (t_fractol *)param;
-	shift_fac = 0.025;
 	xrange = frac -> max.x - frac -> min.x;
 	yrange = frac -> max.y - frac -> min.y;
 	if (mlx_is_key_down(frac -> mlx, MLX_KEY_RIGHT))
-	{
-		frac -> min.x += xrange * shift_fac;
-		frac -> max.x += xrange * shift_fac;
-	}
+		x_shift_fac = 0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT))
-	{
-		frac -> min.x -= xrange * shift_fac;
-		frac -> max.x -= xrange * shift_fac;
-	}
+		x_shift_fac = -0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_UP))
-	{
-		frac -> min.y += yrange * shift_fac;
-		frac -> max.y += yrange * shift_fac;
-	}
+		y_shift_fac = 0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_DOWN))
-	{
-		frac -> min.y -= yrange * shift_fac;
-		frac -> max.y -= yrange * shift_fac;
-	}else
-		return;
+		y_shift_fac = -0.025;
+	else
+		return ;
+	frac -> min.x += xrange * x_shift_fac;
+	frac -> max.x += xrange * x_shift_fac;
+	frac -> min.y += yrange * y_shift_fac;
+	frac -> max.y += yrange * y_shift_fac;
 	fractol_render(&(*frac));
 }
-		

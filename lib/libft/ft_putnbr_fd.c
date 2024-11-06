@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 15:21:14 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/10/30 21:48:27 by wweerasi         ###   ########.fr       */
+/*   Created: 2024/04/28 20:56:06 by wweerasi          #+#    #+#             */
+/*   Updated: 2024/04/28 21:23:02 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include <stdio.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_fractol	frac;
+	char	digit;
 
-	if (!is_valid(argc, argv))
-		exit(EXIT_FAILURE);
-	init_fractol(&frac, argv);
-	fractol_render(&frac);
-	control_guide();
-	mlx_key_hook(frac.mlx, esc, &frac);
-	mlx_scroll_hook(frac.mlx, zoom, &frac);
-	mlx_loop_hook(frac.mlx, shift, &frac);
-	mlx_loop(frac.mlx);
-	mlx_terminate(frac.mlx);
-	return (EXIT_SUCCESS);
-	return(0);
+	if (n == -2147483648)
+	{
+		n = 147483648;
+		write(fd, "-2", 2);
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -1 * n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+	{
+		digit = n + '0';
+		write(fd, &digit, 1);
+	}
 }
