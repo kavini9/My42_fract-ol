@@ -16,7 +16,7 @@ uint32_t	get_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
-
+/*
 void	get_color(t_color *pix, int n)
 {
 	if (n == MAX_ITER)
@@ -29,4 +29,70 @@ void	get_color(t_color *pix, int n)
 	pix -> b = (uint32_t)(sin(n + 2 * M_PI / 3) / 3 * 127.5 + 127.5);
 	pix -> a = 255;
 	pix -> color = get_pixel(pix -> r, pix -> g, pix -> b, pix -> a);
+}*/
+
+void	get_color(t_color *pix, int n)
+{
+	uint32_t r;
+ 	uint32_t g;
+  	uint32_t b;
+   
+	if (n == MAX_ITER)
+	{
+		pix -> color = get_pixel(0, 0, 0, 255);
+		return ;
+	}
+	r = pix -> r + (uint32_t)(sin(n) * 127.5 + 127.5);
+	g = pix -> g + (uint32_t)(sin(n + M_PI / 3)* 127.5 + 127.5);
+	b = pix -> b + (uint32_t)(sin(n + 2 * M_PI / 3) * 127.5 + 127.5);
+	pix -> a = 255;
+	pix -> color = get_pixel(pix -> r, pix -> g, pix -> b, pix -> a);
 }
+
+void	set_rgb(double c, double x, t_color *clr)
+{
+	if ( clr -> h < 60 || clr -> h >= 300)
+	{
+		clr -> r += c;
+		if ( clr -> h < 60)
+			clr -> g += x;
+		else
+			clr -> b += x;
+	}
+	else if ( clr -> h >= 60 && clr -> h < 180)
+	{
+		clr -> g += c;
+		if ( clr -> h <= 120)
+			clr -> r += x;
+		else
+			clr -> b += x;
+	}
+	else if ( clr -> h >= 180 && clr -> h < 300)
+	{
+		clr -> b += c;
+		if ( clr -> h <= 240)
+			clr -> g += x;
+		else
+			clr -> r += x;
+	}
+}
+
+uint32_t	set_palette(t_color *color)
+{
+	double	c;
+	double	x;
+	double	m;
+
+	c = v * s;
+	x = c * (1 - abs((h / 60) % 2 - 1));
+	m = v - c;
+	color -> r = m;
+	color -> g = m;
+	color -> b = m;
+	set_rgb(c, x, color);
+	color -> r *= 255;
+	color -> g *= 255;
+	color -> b *= 255;
+}
+	
+
