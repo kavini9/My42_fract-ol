@@ -31,9 +31,12 @@ typedef struct s_coord
 
 typedef struct s_color
 {
-	uint32_t	r;
-	uint32_t	g;
-	uint32_t	b;
+	double		h;
+	double		s;
+	double		v;
+	double		r;
+	double		g;
+	double		b;
 	uint32_t	a;
 	uint32_t	color;
 }	t_color;
