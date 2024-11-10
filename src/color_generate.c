@@ -33,20 +33,21 @@ void	get_color(t_color *pix, int n)
 
 void	get_color(t_color *pix, int n)
 {
-	uint32_t r;
- 	uint32_t g;
-  	uint32_t b;
+	uint8_t r;
+ 	uint8_t g;
+  	uint8_t b;
+	uint8_t a;
    
 	if (n == MAX_ITER)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
 	}
-	r = pix -> r + (uint32_t)(sin(n) * 127.5 + 127.5);
-	g = pix -> g + (uint32_t)(sin(n + M_PI / 3)* 127.5 + 127.5);
-	b = pix -> b + (uint32_t)(sin(n + 2 * M_PI / 3) * 127.5 + 127.5);
-	pix -> a = 255;
-	pix -> color = get_pixel(pix -> r, pix -> g, pix -> b, pix -> a);
+	r = (uint8_t)(pix -> r + (sin(mu) * pix -> radi));
+	g = (uint8_t)(pix -> g + (sin(mu + M_PI / 3)* pix -> radi));
+	b = (uint8_t)(pix -> b + (sin(mu + 2 * M_PI / 3) * pix -> radi));
+	a = 255;
+	pix -> color = get_pixel(r, g, b, a);
 }
 
 void	set_rgb(double c, double x, t_color *clr)
