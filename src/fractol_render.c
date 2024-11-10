@@ -24,20 +24,23 @@ void	escape_count(t_fractol *frac)
 	double	zy;
 	double	cx;
 	double	cy;
-	double	tmp_zx;
-
+	double	tmp;
+	
 	zx = frac->z.x;
 	zy = frac->z.y;
 	cx = frac->c.x;
 	cy = frac->c.y;
-	frac->n = 0;
+	frac -> n = 0;
+	frac -> mu = 0;
 	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < MAX_ITER)
 	{
-		tmp_zx = (zx * zx) - (zy * zy) + cx;
+		tmp = (zx * zx) - (zy * zy) + cx;
 		zy = 2 * zx * zy + cy;
-		zx = tmp_zx;
+		zx = tmp;
 		frac->n++;
 	}
+	tmp = sqrt((zx * zx) + (zy * zy));
+	frac -> mu = frac -> n - (log(log(tmp)) / log(2.0));
 }
 
 void	julia(int x, int y, t_fractol *frac)
