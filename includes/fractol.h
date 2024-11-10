@@ -39,7 +39,7 @@ typedef struct s_color
 	double		b;
 	uint32_t	a;
 	uint32_t	color;
-	uint8_t		radius;
+	uint8_t		radi;
 }	t_color;
 
 typedef struct s_fractol
