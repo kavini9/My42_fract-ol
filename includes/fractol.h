@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 07:41:25 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/03 07:43:06 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:54:04 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define FRACTOL_H
 
 # include "../lib/libft/libft.h"
-# include "./MLX42/include/MLX42/MLX42.h"
+# include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <unistd.h>//see if this needed here
 # include <stdlib.h>//see if this is needed here 
 # include <math.h>
 
 # define WIDTH 1500
 # define HEIGHT 1500
-# define MAX_ITER 500
+# define MAX_ITER 100
 
 typedef struct s_coord
 {
@@ -53,6 +53,7 @@ typedef struct s_fractol
 	t_coord		c;
 	t_color		pix;
 	int			n;
+	double		mu;
 
 }	t_fractol;
 
@@ -61,7 +62,7 @@ int		control_guide(void);
 int		is_valid(int ac, char **av);
 void	init_fractol(t_fractol *frac, char **av);
 void	fractol_render(t_fractol *frac);
-void	get_color(t_color *pix, int n);
+void	get_color(t_color *pix, int n, double mu);
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac);
 void	zoom(double xdelta, double ydelta, void *param);
 void	shift(void *param);

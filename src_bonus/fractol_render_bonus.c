@@ -1,4 +1,16 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_render_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 14:48:57 by wweerasi          #+#    #+#             */
+/*   Updated: 2024/11/11 21:44:24 by wweerasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/fractol.h"
 
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
 {
@@ -38,7 +50,7 @@ void	julia(int x, int y, t_fractol *frac)
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> z), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n);
+	get_color(&(frac -> pix), frac -> n, frac -> mu);
 }
 
 void	mandelbrot(int x, int y, t_fractol *frac)
@@ -50,7 +62,7 @@ void	mandelbrot(int x, int y, t_fractol *frac)
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> c), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n);
+	get_color(&(frac -> pix), frac -> n, frac -> mu);
 }
 
 void	fractol_render(t_fractol *frac)
