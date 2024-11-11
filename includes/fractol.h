@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 07:41:25 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:54:04 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:50:53 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int		arg_guide(char *err_msg);
 int		control_guide(void);
 int		is_valid(int ac, char **av);
 void	init_fractol(t_fractol *frac, char **av);
+void	set_color(t_fractol *frac);
 void	fractol_render(t_fractol *frac);
 void	get_color(t_color *pix, int n, double mu);
+uint32_t	set_palette(t_color *color);
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac);
 void	zoom(double xdelta, double ydelta, void *param);
 void	shift(void *param);
