@@ -19,7 +19,7 @@ uint32_t	get_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 /*
 void	get_color(t_color *pix, int n)
 {
-	if (n == MAX_ITER)
+	if (n == frac -> max_iter)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
@@ -38,7 +38,7 @@ void	get_color(t_color *pix, int n, double mu)
   	uint8_t b;
 	uint8_t a;
    
-	if (n == MAX_ITER)
+	if (n == frac -> max_iter)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
@@ -57,14 +57,14 @@ void	get_color(t_color *pix, int n, double mu)
   	uint8_t b;
 	uint8_t a;
    
-	if (n == MAX_ITER)
+	if (n == frac -> max_iter)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
 	}
-	r = (uint8_t)(pix -> r + (sin(mu * M_PI / MAX_ITER)* pix -> radi));
-	g = (uint8_t)(pix -> g + (sin((mu / MAX_ITER + 1/ 3) * M_PI) / 2 * pix -> radi));
-	b = (uint8_t)(pix -> b + (sin((mu / MAX_ITER + 2/ 3) * M_PI) / 3* pix -> radi));
+	r = (uint8_t)(pix -> r + (sin(mu * M_PI / frac -> max_iter)* pix -> radi));
+	g = (uint8_t)(pix -> g + (sin((mu / frac -> max_iter + 1/ 3) * M_PI) / 2 * pix -> radi));
+	b = (uint8_t)(pix -> b + (sin((mu / frac -> max_iter + 2/ 3) * M_PI) / 3* pix -> radi));
 	a = 255;
 	pix -> color = get_pixel(r, g, b, a);
 }
