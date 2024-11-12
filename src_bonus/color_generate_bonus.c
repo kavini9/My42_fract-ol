@@ -30,7 +30,7 @@ void	get_color(t_color *pix, int n)
 	pix -> a = 255;
 	pix -> color = get_pixel(pix -> r, pix -> g, pix -> b, pix -> a);
 }*/
-
+/*
 void	get_color(t_color *pix, int n, double mu)
 {
 	uint8_t r;
@@ -46,6 +46,25 @@ void	get_color(t_color *pix, int n, double mu)
 	r = (uint8_t)(pix -> r + (sin(mu) * pix -> radi));
 	g = (uint8_t)(pix -> g + (sin(mu + M_PI / 3)/2 * pix -> radi));
 	b = (uint8_t)(pix -> b + (sin(mu + 2 * M_PI / 3) / 3* pix -> radi));
+	a = 255;
+	pix -> color = get_pixel(r, g, b, a);
+}*/
+
+void	get_color(t_color *pix, int n, double mu)
+{
+	uint8_t r;
+ 	uint8_t g;
+  	uint8_t b;
+	uint8_t a;
+   
+	if (n == MAX_ITER)
+	{
+		pix -> color = get_pixel(0, 0, 0, 255);
+		return ;
+	}
+	r = (uint8_t)(pix -> r + (sin(mu * M_PI / MAX_ITER)* pix -> radi));
+	g = (uint8_t)(pix -> g + (sin((mu / MAX_ITER + 1/ 3) * M_PI) / 2 * pix -> radi));
+	b = (uint8_t)(pix -> b + (sin((mu / MAX_ITER + 2/ 3) * M_PI) / 3* pix -> radi));
 	a = 255;
 	pix -> color = get_pixel(r, g, b, a);
 }
