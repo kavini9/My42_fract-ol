@@ -19,7 +19,7 @@ uint32_t	get_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 
 void	get_color(t_color *pix, int n)
 {
-	if (n == MAX_ITER)
+	if (n == frac -> max_iter)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return;
