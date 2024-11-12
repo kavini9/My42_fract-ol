@@ -42,7 +42,7 @@ int	is_valid(int ac, char **av)
 {
 	if (ac < 2 || ac == 3 || ac > 4)
 		return (arg_guide("Invalid number of arguments"));
-	if (!ft_strcmp(av[1], "mandelbrot"))
+	if (!ft_strcmp(av[1], "mandelbrot") || !ft_strcmp(av[1], "burning_ship"))
 	{
 		if (ac != 2)
 			return (arg_guide("Invalid number of arguments"));
