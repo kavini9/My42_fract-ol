@@ -35,7 +35,10 @@ void	escape_count(t_fractol *frac)
 	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < MAX_ITER)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
-		zy = 2 * zx * zy + cy;
+		if (!ft_strcmp(frac -> f_set, "burning_ship"))
+			zy = 2 * fabs(zx * zy) + cy;
+		else
+			zy = 2 * zx * zy + cy;
 		zx = tmp;
 		frac->n++;
 	}
@@ -53,7 +56,7 @@ void	julia(int x, int y, t_fractol *frac)
 	get_color(&(frac -> pix), frac -> n, frac -> mu);
 }
 
-void	mandelbrot(int x, int y, t_fractol *frac)
+void	mandel_n_ship(int x, int y, t_fractol *frac)
 {
 	double	tmp_zx;
 
@@ -78,8 +81,9 @@ void	fractol_render(t_fractol *frac)
 		{
 			if (!ft_strcmp(frac -> f_set, "julia"))
 				julia(x, y, frac);
-			if (!ft_strcmp(frac -> f_set, "mandelbrot"))
-				mandelbrot(x, y, frac);
+			if (!ft_strcmp(frac -> f_set, "mandelbrot") || 
+				!ft_strcmp(frac -> f_set, "burning_ship"))
+				mandel_n_ship(x, y, frac);
 			mlx_put_pixel(frac-> img, x, y, frac -> pix.color);
 			y++;
 		}
