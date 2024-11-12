@@ -21,7 +21,6 @@
 
 # define WIDTH 1500
 # define HEIGHT 1500
-# define MAX_ITER 100
 
 typedef struct s_coord
 {
@@ -52,6 +51,7 @@ typedef struct s_fractol
 	t_coord		z;
 	t_coord		c;
 	t_color		pix;
+	int		max_iter;
 	int			n;
 	double		mu;
 
