@@ -37,6 +37,13 @@ static void	set_viewport(t_fractol *frac)
 		frac -> max.x = 2.0;
 		frac -> max.y = 2.5;
 	}
+	else if (!ft_strcmp(frac -> f_set, "burning_ship"))
+	{
+		frac -> min.x = -1.0;
+		frac -> min.y = -1.0;
+		frac -> max.x = 2.0;
+		frac -> max.y = 2.0;
+	}
 }
 
 static void	set_julia_c(t_fractol *frac, char **av)
