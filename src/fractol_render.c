@@ -20,7 +20,7 @@ void	escape_count(t_fractol *frac)
 	cy = frac->c.y;
 	frac -> n = 0;
 	frac -> mu = 0;
-	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < MAX_ITER)
+	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < frac -> max_iter)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
 		zy = 2 * zx * zy + cy;
