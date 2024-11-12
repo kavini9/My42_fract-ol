@@ -12,7 +12,7 @@
 
 #include "../includes/fractol.h"
 
-void	esc(mlx_key_data_t keydata, void *param)
+void	ctrl(mlx_key_data_t keydata, void *param)
 {
 	t_fractol	*frac;
 
@@ -21,7 +21,22 @@ void	esc(mlx_key_data_t keydata, void *param)
 	{
 		mlx_delete_image(frac -> mlx, frac -> img);
 		mlx_close_window(frac -> mlx);
+		return ;
 	}
+	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+		control_guide();
+	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+	{
+		set_color(frac);
+		set_viewport(frac);
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD)
+		&& frac -> max_iter < 500)
+		frac -> max_iter *= 1.1;
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT)
+		&& frac -> max_iter > 10)
+		frac->max_iter *= 0.9;
+	fractol_render(&(*frac));
 }
 
 void	zoom(double xdelta, double ydelta, void *param)
