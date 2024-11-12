@@ -34,6 +34,7 @@ static void	set_julia_c(t_fractol *frac, char **av)
 void	init_fractol(t_fractol *frac, char **av)
 {
 	frac -> f_set = av[1];
+	frac -> max_iter = 100;
 	frac -> mlx = mlx_init(WIDTH, HEIGHT, frac -> f_set, false);
 	if (!(frac -> mlx))
 	{
