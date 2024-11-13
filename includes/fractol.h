@@ -68,7 +68,7 @@ uint32_t	set_palette(t_color *color);
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac);
 void	zoom(double xdelta, double ydelta, void *param);
 void	shift(void *param);
-void	esc(mlx_key_data_t keydata, void *param);
+void	ctrl(mlx_key_data_t keydata, void *param);
 void	error_out(char *error_msg);
 
 #endif
