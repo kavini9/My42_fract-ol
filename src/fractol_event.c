@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void	esc(mlx_key_data_t keydata, void *param)
+void	ctrl(mlx_key_data_t keydata, void *param)
 {
 	t_fractol	*frac;
 
