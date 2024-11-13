@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 	init_fractol(&frac, argv);
 	fractol_render(&frac);
 	control_guide();
-	mlx_key_hook(frac.mlx, esc, &frac);
+	mlx_key_hook(frac.mlx, ctrl, &frac);
 	mlx_scroll_hook(frac.mlx, zoom, &frac);
 	mlx_loop_hook(frac.mlx, shift, &frac);
 	mlx_loop(frac.mlx);
