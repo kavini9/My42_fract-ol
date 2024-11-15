@@ -30,12 +30,14 @@ void	ctrl(mlx_key_data_t keydata, void *param)
 		set_color(frac);
 		set_viewport(frac);
 	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD)
+	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD)
 		&& frac -> max_iter < 500)
-		frac -> max_iter *= 1.1;
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT)
+		frac -> max_iter += 5 ;
+	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT)
 		&& frac -> max_iter > 10)
-		frac->max_iter *= 0.9;
+		frac->max_iter -= 5;
+	else
+		return;
 	fractol_render(&(*frac));
 }
 
@@ -90,4 +92,34 @@ void	shift(void *param)
 	frac -> min.y += yrange * y_shift_fac;
 	frac -> max.y += yrange * y_shift_fac;
 	fractol_render(&(*frac));
+}
+
+void	color(void *param)
+{
+	t_fractol	*frac;
+	double *comp
+
+	frac = (t_fractol *)param;
+	
+	if (mlx_is_key_down(frac -> mlx, MLX_KEY_H))
+	{
+		if (mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT))
+			frac -> pix.h += 1;
+		else
+			frac -> pix.h -= 1;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_G))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->k_green *= 0.5;
+		else
+			fractol->k_green *= 2;
+	}
+	if (mlx_is_key_down(fractol->mlx, MLX_KEY_B))
+	{
+		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
+			fractol->k_blue *= 0.5;
+		else
+			fractol->k_blue *= 2;
+	}
 }
