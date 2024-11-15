@@ -94,32 +94,31 @@ void	shift(void *param)
 	fractol_render(&(*frac));
 }
 
-void	color(void *param)
+void color(void *param)
 {
-	t_fractol	*frac;
-	double *comp
+    t_fractol *frac;
 
-	frac = (t_fractol *)param;
-	
-	if (mlx_is_key_down(frac -> mlx, MLX_KEY_H))
-	{
-		if (mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT))
-			frac -> pix.h += 1;
-		else
-			frac -> pix.h -= 1;
-	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_G))
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_green *= 0.5;
-		else
-			fractol->k_green *= 2;
-	}
-	if (mlx_is_key_down(fractol->mlx, MLX_KEY_B))
-	{
-		if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT_SHIFT))
-			fractol->k_blue *= 0.5;
-		else
-			fractol->k_blue *= 2;
-	}
+    frac = (t_fractol *)param;
+    if (mlx_is_key_down(frac -> mlx, MLX_KEY_H) &&
+        mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
+        frac -> pix.h < 360.0)
+        frac -> pix.h += 1;
+    else if (mlx_is_key_down(frac -> mlx, MLX_KEY_H) && frac -> pix.h > 0)
+        frac -> pix.h -= 1;
+    else if (mlx_is_key_down(frac -> mlx, MLX_KEY_S) &&
+             mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
+             frac -> pix.s < 1.0)
+        frac -> pix.s += 0.1;
+    else if (mlx_is_key_down(frac -> mlx, MLX_KEY_S) && frac -> pix.s > 0.0)
+        frac -> pix.s -= 0.1;
+    else if (mlx_is_key_down(frac -> mlx, MLX_KEY_V) &&
+             mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
+             frac -> pix.v < 1.0)
+        frac -> pix.v += 0.1;
+    else if (mlx_is_key_down(frac -> mlx, MLX_KEY_V) && frac -> pix.v > 0.0)
+        frac -> pix.v -= 0.1;
+    else
+        return;
+    fractol_render(frac);
 }
+
