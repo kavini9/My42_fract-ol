@@ -122,7 +122,7 @@ void color(void *param)
     fractol_render(frac);
 }
 
-void update_hsv(int key, double end, double step, t_fractol frac)
+static void update_hsv(int key, double end, double step, t_fractol frac)
 {
 	double start;
 	double *hsv_comp;
