@@ -27,6 +27,16 @@ int	control_guide(void)
 		"\n| MOUSE	- Zooming\t\t\t\t|"
 		"\n| \tSCROLL_UP	- Zoom in\t\t\t\t|"
 		"\n| \tSCROLL_DOWN	- Zoom out\t\t\t\t|"
+		"\n| Color adjustments\t\t\t\t\t\t|"
+		"\n| \tH + SHIFT	- Increase Hue\t\t\t\t|"
+		"\n| \tH		- Decrease Hue\t\t\t\t|"
+		"\n| \tS + SHIFT	- Increase Saturation\t\t\t|"
+		"\n| \tS		- Decrease Saturation\t\t\t|"
+		"\n| \tV + SHIFT	- Increase Brightness\t\t\t|"
+		"\n| \tV		- Decrease Brightness\t\t\t|"
+		"\n| Numpad +	- Increase max iterations\t\t\t|"
+		"\n| Numpad -	- Decrease max iterations\t\t\t|"
+		"\n| R		- Reset color and viewport\t\t\t|"
 		"\n<===========================================================>",
 		STDERR_FILENO);
 }
