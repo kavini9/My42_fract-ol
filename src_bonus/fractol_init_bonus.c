@@ -17,7 +17,7 @@ void	set_color(t_fractol *frac)
 	frac -> pix.h = 160.0;
 	frac -> pix.s = 1.0;
 	frac -> pix.v = 0.70;
-	frac -> pix.radi = 50.0;
+	frac -> pix.radi = 127.5;
 	set_palette(&(frac -> pix));
 }
 
