@@ -122,3 +122,49 @@ void color(void *param)
     fractol_render(frac);
 }
 
+void update_hsv(int key, double end, double step, t_fractol frac)
+{
+	double start;
+	double *hsv_comp;
+	
+	start = 0.0;
+	if (key ==  MLX_KEY_H)
+		hsv_comp = &(frac -> pix.h);
+	else if (key ==  MLX_KEY_S)
+		hsv_comp = &(frac -> pix.s);
+	else if (key ==  MLX_KEY_V)
+		hsv_comp = &(frac -> pix.v);
+	shift = MLX_KEY_LEFT_SHIFT;
+	while(mlx_is_key_down(frac -> mlx, key) &&
+        mlx_is_key_down(frac -> mlx, shift) &&
+        *hsv_comp < end)
+		*hsv_comp++;
+	while(mlx_is_key_down(frac -> mlx, key) &&
+        mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
+        *hsv_comp > start)
+		*hsv_comp--;
+}
+
+void color(void *param)
+{
+	t_fractol *frac;
+	
+	frac = (t_fractol *)param;
+	if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
+		update_hsv(MLX_KEY_H, 360.0, 1.0, frac);
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		update_hsv(MLX_KEY_S, 1.0, 0.1, frac);
+	else if (keydata.key == MLX_KEY_V && keydata.action == MLX_PRESS)
+		update_hsv(MLX_KEY_V, 1.0, 0.1, frac);
+	else
+		return ;
+	fractol_render(frac);
+	ft_putstr_fd(" Updated color values:\tH\t\tS\t\tV\n\t\t\t", STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.h, STDOUT_FILENO);
+	ft_putstr_fd("\t\t", STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.s, STDOUT_FILENO);
+	ft_putstr_fd("\t\t", STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.v, STDOUT_FILENO);
+	ft_putstr_fd("\n", STDOUT_FILENO);
+}
+
