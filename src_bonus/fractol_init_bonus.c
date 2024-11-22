@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:02:04 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 23:02:53 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:05:31 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	set_color(t_fractol *frac)
 {
-	frac -> pix.h = 160.0;
-	frac -> pix.s = 1.0;
-	frac -> pix.v = 0.70;
-	frac -> pix.radi = 127.5;
+	frac -> pix.h = 60.0;
+	frac -> pix.s = 0.5;
+	frac -> pix.v = 0.5;
+	frac -> pix.radi;
 	set_palette(&(frac -> pix));
 }
 
-static void	set_viewport(t_fractol *frac)
+void	set_viewport(t_fractol *frac)
 {
 	if (!ft_strcmp(frac -> f_set, "julia"))
 	{

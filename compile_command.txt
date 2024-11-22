@@ -1,2 +1,1 @@
-gcc main_bonus.c arg_validate_bonus.c color_generate_bonus.c error_help_bonus.c fractol_event_bonus.c fractol_init_bonus.c fractol_render_bonus.c ../lib/libft/ft_isdigit.c ../lib/libft/ft_atof.c ../lib/libft/ft_strcmp.c ../lib/libft/ft_putstr_fd.c ../lib/libft/ft_putendl_fd.c ../lib/MLX42/build/libmlx42.a -I../lib/MLX42/include -ldl -lglfw -pthread -lm
-
+gcc main_bonus.c arg_validate_bonus.c color_generate_bonus.c error_help_bonus.c fractol_event_bonus.c fractol_init_bonus.c fractol_render_bonus.c ../lib/libft/ft_isdigit.c ../lib/libft/ft_atof.c ../lib/libft/ft_strcmp.c ../lib/libft/ft_putstr_fd.c ../lib/libft/ft_putendl_fd.c ../lib/libft/ft_putflt_fd.c ../lib/libft/ft_putnbr_fd.c ../lib/MLX42/build/libmlx42.a -I../lib/MLX42/include -ldl -lglfw -pthread -lm

@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:48:57 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:44:24 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:10:41 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	escape_count(t_fractol *frac)
 	cy = frac->c.y;
 	frac -> n = 0;
 	frac -> mu = 0;
-	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < frac -> max_iter)
+	while ((zx * zx) + (zy * zy) < 20.0 && frac->n < frac -> max_iter)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
 		if (!ft_strcmp(frac -> f_set, "burning_ship"))
@@ -53,7 +53,7 @@ void	julia(int x, int y, t_fractol *frac)
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> z), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n, frac -> mu);
+	get_color(frac, frac -> n, frac -> mu);
 }
 
 void	mandel_n_ship(int x, int y, t_fractol *frac)
@@ -65,7 +65,7 @@ void	mandel_n_ship(int x, int y, t_fractol *frac)
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> c), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n, frac -> mu);
+	get_color(frac, frac -> n, frac -> mu);
 }
 
 void	fractol_render(t_fractol *frac)

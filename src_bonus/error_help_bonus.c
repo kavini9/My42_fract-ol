@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_help.c                                       :+:      :+:    :+:   */
+/*   error_help_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 06:46:56 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:04:56 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:04:34 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	control_guide(void)
 {
 	ft_putendl_fd(
-		"<===========================================================>"
-		"\n| \033[4mControl guide\033[0m\t\t\t\t\t\t|"
+		"<===============================================================>"
+		"\n| \033[4mControl guide\033[0m\t\t\t\t\t\t\t|"
 		"\n| ESC		- Exit program\t\t\t\t|"
 		"\n| TAB		- Display control guide\t\t\t\t|"
 		"\n| ARROW_KEYS		- Panning\t\t\t\t|"
@@ -37,7 +37,7 @@ int	control_guide(void)
 		"\n| Numpad +	- Increase max iterations\t\t\t|"
 		"\n| Numpad -	- Decrease max iterations\t\t\t|"
 		"\n| R		- Reset color and viewport\t\t\t|"
-		"\n<===========================================================>",
+		"\n<==============================================================>",
 		STDERR_FILENO);
 }
 

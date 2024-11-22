@@ -6,7 +6,7 @@
 #    By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 18:55:54 by wweerasi          #+#    #+#              #
-#    Updated: 2024/10/27 16:23:24 by wweerasi         ###   ########.fr        #
+#    Updated: 2024/11/22 14:53:23 by wweerasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SOURCES = ft_isalpha.c \
 		  ft_putchar_fd.c \
 		  ft_putstr_fd.c \
 		  ft_putendl_fd.c \
+		  ft_putflt_fd.c \
 		  ft_putnbr_fd.c \
 
 BONUS_SOURCES = ft_lstnew_bonus.c \

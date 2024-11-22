@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:54:46 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:57:50 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/22 19:37:29 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,23 @@ void	get_color(t_color *pix, int n, double mu)
 	pix -> color = get_pixel(r, g, b, a);
 }*/
 
-void	get_color(t_color *pix, int n, double mu)
+void	get_color(t_fractol *frac, int n, double mu)
 {
 	uint8_t r;
  	uint8_t g;
   	uint8_t b;
 	uint8_t a;
-   
+	t_color *pix;
+
+	pix = &(frac -> pix);
 	if (n == frac -> max_iter)
 	{
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
 	}
-	r = (uint8_t)(pix -> r + (sin(mu * M_PI / frac -> max_iter)* pix -> radi));
-	g = (uint8_t)(pix -> g + (sin((mu / frac -> max_iter + 1/ 3) * M_PI) / 2 * pix -> radi));
-	b = (uint8_t)(pix -> b + (sin((mu / frac -> max_iter + 2/ 3) * M_PI) / 3* pix -> radi));
+	r = (uint8_t)(pix -> r * (1 + (sin(mu * M_PI / frac -> max_iter)* pix -> radi)));
+	g = (uint8_t)(pix -> g * (1 + (sin((mu / frac -> max_iter + 1/ 3) * M_PI) * pix -> radi)));
+	b = (uint8_t)(pix -> b * (1 + (sin((mu / frac -> max_iter + 2/ 3) * M_PI) * pix -> radi)));
 	a = 255;
 	pix -> color = get_pixel(r, g, b, a);
 }

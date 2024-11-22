@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_event.c                                    :+:      :+:    :+:   */
+/*   fractol_event_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:12:55 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:05:21 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/22 19:02:01 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ctrl(mlx_key_data_t keydata, void *param)
 	{
 		mlx_delete_image(frac -> mlx, frac -> img);
 		mlx_close_window(frac -> mlx);
+		ft_putendl_fd("Closed the window", 1);
 		return ;
 	}
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
@@ -30,10 +31,10 @@ void	ctrl(mlx_key_data_t keydata, void *param)
 		set_color(frac);
 		set_viewport(frac);
 	}
-	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_ADD)
+	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_KP_ADD)
 		&& frac -> max_iter < 500)
 		frac -> max_iter += 5 ;
-	else if (mlx_is_key_down(fractol->mlx, MLX_KEY_KP_SUBTRACT)
+	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_KP_SUBTRACT)
 		&& frac -> max_iter > 10)
 		frac->max_iter -= 5;
 	else
@@ -93,7 +94,7 @@ void	shift(void *param)
 	frac -> max.y += yrange * y_shift_fac;
 	fractol_render(&(*frac));
 }
-
+/*
 void color(void *param)
 {
     t_fractol *frac;
@@ -102,7 +103,7 @@ void color(void *param)
     if (mlx_is_key_down(frac -> mlx, MLX_KEY_H) &&
         mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
         frac -> pix.h < 360.0)
-        frac -> pix.h += 1;
+        frac -> pix.h += 5;
     else if (mlx_is_key_down(frac -> mlx, MLX_KEY_H) && frac -> pix.h > 0)
         frac -> pix.h -= 1;
     else if (mlx_is_key_down(frac -> mlx, MLX_KEY_S) &&
@@ -119,52 +120,58 @@ void color(void *param)
         frac -> pix.v -= 0.1;
     else
         return;
+    set_palette(&(frac -> pix));
     fractol_render(frac);
 }
-
-static void update_hsv(int key, double end, double step, t_fractol frac)
+*/
+static void update_hsv(int key, double end, double step, t_fractol *frac)
 {
 	double start;
 	double *hsv_comp;
 	
-	start = 0.0;
+	start = 0.01;
+	ft_putendl_fd("We are in update_hsv", 1); //delete this
 	if (key ==  MLX_KEY_H)
 		hsv_comp = &(frac -> pix.h);
 	else if (key ==  MLX_KEY_S)
 		hsv_comp = &(frac -> pix.s);
 	else if (key ==  MLX_KEY_V)
 		hsv_comp = &(frac -> pix.v);
-	shift = MLX_KEY_LEFT_SHIFT;
-	while(mlx_is_key_down(frac -> mlx, key) &&
-        mlx_is_key_down(frac -> mlx, shift) &&
-        *hsv_comp < end)
-		*hsv_comp++;
-	while(mlx_is_key_down(frac -> mlx, key) &&
+	ft_putendl_fd("We assigned the variable to pointer", 1); //delete this
+	if(mlx_is_key_down(frac -> mlx, key) &&
         mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
+        *hsv_comp < end)
+		*hsv_comp += step;
+	if(mlx_is_key_down(frac -> mlx, key) &&
+        !mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT_SHIFT) &&
         *hsv_comp > start)
-		*hsv_comp--;
+		*hsv_comp -= step;
+	ft_putstr_fd("We changed value and number is:", 1);
+	ft_putflt_fd(*hsv_comp, 1, 2);
+	set_palette(&(frac -> pix));
+	ft_putendl_fd("We set palette", 1);
 }
 
-void color(void *param)
+void color(mlx_key_data_t keydata, void *param)
 {
 	t_fractol *frac;
 	
 	frac = (t_fractol *)param;
 	if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
-		update_hsv(MLX_KEY_H, 360.0, 1.0, frac);
+		update_hsv(MLX_KEY_H, 360.0, 5.0, frac);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		update_hsv(MLX_KEY_S, 1.0, 0.1, frac);
+		update_hsv(MLX_KEY_S, .99, 0.1, frac);
 	else if (keydata.key == MLX_KEY_V && keydata.action == MLX_PRESS)
-		update_hsv(MLX_KEY_V, 1.0, 0.1, frac);
+		update_hsv(MLX_KEY_V, .99, 0.1, frac);
 	else
 		return ;
 	fractol_render(frac);
 	ft_putstr_fd(" Updated color values:\tH\t\tS\t\tV\n\t\t\t", STDOUT_FILENO);
-	ft_putflt_fd(frac -> pix.h, STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.h, STDOUT_FILENO, 2);
 	ft_putstr_fd("\t\t", STDOUT_FILENO);
-	ft_putflt_fd(frac -> pix.s, STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.s, STDOUT_FILENO, 2);
 	ft_putstr_fd("\t\t", STDOUT_FILENO);
-	ft_putflt_fd(frac -> pix.v, STDOUT_FILENO);
+	ft_putflt_fd(frac -> pix.v, STDOUT_FILENO, 2);
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
