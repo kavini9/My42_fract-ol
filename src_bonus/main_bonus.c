@@ -6,11 +6,11 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:21:14 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/22 18:06:44 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:09:11 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -21,8 +21,7 @@ int	main(int argc, char **argv)
 	init_fractol(&frac, argv);
 	fractol_render(&frac);
 	control_guide();
-	mlx_key_hook(frac.mlx, ctrl, &frac);
-	mlx_key_hook(frac.mlx, color, &frac);
+	mlx_key_hook(frac.mlx, key_ctrls, &frac);
 	mlx_scroll_hook(frac.mlx, zoom, &frac);
 	mlx_loop_hook(frac.mlx, shift, &frac);
 	mlx_loop(frac.mlx);

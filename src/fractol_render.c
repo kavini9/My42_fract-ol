@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
 {

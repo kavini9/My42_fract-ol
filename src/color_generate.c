@@ -6,11 +6,11 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:54:46 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/03 06:08:44 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:07:53 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 uint32_t	get_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {

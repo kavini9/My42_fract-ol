@@ -6,11 +6,11 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:54:46 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/22 19:37:29 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/24 00:33:59 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 uint32_t	get_pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
 {
@@ -52,10 +52,10 @@ void	get_color(t_color *pix, int n, double mu)
 
 void	get_color(t_fractol *frac, int n, double mu)
 {
-	uint8_t r;
- 	uint8_t g;
-  	uint8_t b;
-	uint8_t a;
+	uint32_t r;
+ 	uint32_t g;
+  	uint32_t b;
+	uint32_t a;
 	t_color *pix;
 
 	pix = &(frac -> pix);
@@ -64,9 +64,9 @@ void	get_color(t_fractol *frac, int n, double mu)
 		pix -> color = get_pixel(0, 0, 0, 255);
 		return ;
 	}
-	r = (uint8_t)(pix -> r * (1 + (sin(mu * M_PI / frac -> max_iter)* pix -> radi)));
-	g = (uint8_t)(pix -> g * (1 + (sin((mu / frac -> max_iter + 1/ 3) * M_PI) * pix -> radi)));
-	b = (uint8_t)(pix -> b * (1 + (sin((mu / frac -> max_iter + 2/ 3) * M_PI) * pix -> radi)));
+	r = (uint32_t)(pix -> r * (1 + (sin(mu * M_PI / frac -> max_iter)* pix -> radi)));
+	g = (uint32_t)(pix -> g * (1 + (sin((mu / frac -> max_iter + 1/ 3) * M_PI) * pix -> radi)));
+	b = (uint32_t)(pix -> b * (1 + (sin((mu / frac -> max_iter + 2/ 3) * M_PI) * pix -> radi)));
 	a = 255;
 	pix -> color = get_pixel(r, g, b, a);
 }

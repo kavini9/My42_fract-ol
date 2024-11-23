@@ -6,16 +6,17 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:48:57 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/22 22:10:41 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/24 00:37:57 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
+#include <stdio.h>
 
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
 {
 	p -> x = frac -> min.x + (frac -> max.x - frac -> min.x) / WIDTH * x;
-	p -> y = frac -> max.y - (frac -> max.x - frac -> min.x) / HEIGHT * y;
+	p -> y = frac -> max.y - (frac -> max.y - frac -> min.y) / HEIGHT * y;
 }
 
 void	escape_count(t_fractol *frac)
@@ -30,20 +31,21 @@ void	escape_count(t_fractol *frac)
 	zy = frac->z.y;
 	cx = frac->c.x;
 	cy = frac->c.y;
-	frac -> n = 0;
-	frac -> mu = 0;
-	while ((zx * zx) + (zy * zy) < 20.0 && frac->n < frac -> max_iter)
+	while ((zx * zx) + (zy * zy) < 10.0 && frac->n < frac -> max_iter)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
 		if (!ft_strcmp(frac -> f_set, "burning_ship"))
-			zy = 2 * fabs(zx * zy) + cy;
+			zy = 2 * fabs(zx * zy) - cy;
 		else
 			zy = 2 * zx * zy + cy;
 		zx = tmp;
 		frac->n++;
 	}
-	tmp = sqrt((zx * zx) + (zy * zy));
-	frac -> mu = frac -> n - (log(log(tmp)) / log(2.0));
+	tmp = fabs(sqrt((zx * zx) + (zy * zy)));
+	if (tmp >  0)
+		frac -> mu = frac->n - (log(log(tmp)) / log(2.0));
+	else
+		frac -> mu = 0;
 }
 
 void	julia(int x, int y, t_fractol *frac)
@@ -51,6 +53,7 @@ void	julia(int x, int y, t_fractol *frac)
 	double	tmp_zx;
 
 	frac -> n = 0;
+	frac -> mu = 0;
 	pix_to_cmplex(x, y, &(frac -> z), frac);
 	escape_count(frac);
 	get_color(frac, frac -> n, frac -> mu);
@@ -63,6 +66,7 @@ void	mandel_n_ship(int x, int y, t_fractol *frac)
 	frac -> z.x = 0;
 	frac -> z.y = 0;
 	frac -> n = 0;
+	frac -> mu = 0;
 	pix_to_cmplex(x, y, &(frac -> c), frac);
 	escape_count(frac);
 	get_color(frac, frac -> n, frac -> mu);
@@ -89,5 +93,5 @@ void	fractol_render(t_fractol *frac)
 		}
 		x++;
 	}
-	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);
+//	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);
 }

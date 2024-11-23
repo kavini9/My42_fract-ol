@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_validate.c                                     :+:      :+:    :+:   */
+/*   arg_validate_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:54:21 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/11 21:04:03 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:14:14 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 int	is_float(char *str)
 {

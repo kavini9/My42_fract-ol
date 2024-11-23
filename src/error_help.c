@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	control_guide(void)
 {

@@ -6,18 +6,18 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:02:04 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/22 22:05:31 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/24 00:51:59 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 void	set_color(t_fractol *frac)
 {
-	frac -> pix.h = 60.0;
-	frac -> pix.s = 0.5;
-	frac -> pix.v = 0.5;
-	frac -> pix.radi;
+	frac -> pix.h =360.0;
+	frac -> pix.s = 0.70;
+	frac -> pix.v = 1.00;
+	frac -> pix.radi = 10.0;
 	set_palette(&(frac -> pix));
 }
 
@@ -39,10 +39,10 @@ void	set_viewport(t_fractol *frac)
 	}
 	else if (!ft_strcmp(frac -> f_set, "burning_ship"))
 	{
-		frac -> min.x = -1.0;
-		frac -> min.y = -1.0;
-		frac -> max.x = 2.0;
-		frac -> max.y = 2.0;
+		frac -> min.x = -2.5;
+		frac -> min.y = -1.5;
+		frac -> max.x = 1.5;
+		frac -> max.y = 2.5;
 	}
 }
 
@@ -62,7 +62,7 @@ static void	set_julia_c(t_fractol *frac, char **av)
 void	init_fractol(t_fractol *frac, char **av)
 {
 	frac -> f_set = av[1];
-	frac -> max_iter = 100;
+	frac -> max_iter = 70;
 	frac -> mlx = mlx_init(WIDTH, HEIGHT, frac -> f_set, false);
 	if (!(frac -> mlx))
 	{

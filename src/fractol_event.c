@@ -1,4 +1,16 @@
-#include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_event.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/23 17:01:23 by wweerasi          #+#    #+#             */
+/*   Updated: 2024/11/23 17:01:39 by wweerasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/fractol.h"
 
 void	ctrl(mlx_key_data_t keydata, void *param)
 {
