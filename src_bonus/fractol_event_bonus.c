@@ -12,11 +12,8 @@
 
 #include "../includes/fractol.h"
 
-void	ctrl(mlx_key_data_t keydata, void *param)
+void	prog_ctrls(mlx_key_data_t keydata, t_fractol *frac)
 {
-	t_fractol	*frac;
-
-	frac = (t_fractol *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		mlx_delete_image(frac -> mlx, frac -> img);
@@ -152,11 +149,8 @@ static void update_hsv(int key, double end, double step, t_fractol *frac)
 	ft_putendl_fd("We set palette", 1);
 }
 
-void color(mlx_key_data_t keydata, void *param)
+void color_ctrls(mlx_key_data_t keydata, t_fractol *frac)
 {
-	t_fractol *frac;
-	
-	frac = (t_fractol *)param;
 	if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
 		update_hsv(MLX_KEY_H, 360.0, 5.0, frac);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
@@ -175,3 +169,13 @@ void color(mlx_key_data_t keydata, void *param)
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
+void	key_ctrls(mlx_key_data_t keydata, void *param)
+{
+	t_fractol	*frac;
+
+	frac = (t_fractol *)param;
+	prog_ctrls(keydata, frac);
+	color_ctrls(keydata, frac);
+}
+	
+	
