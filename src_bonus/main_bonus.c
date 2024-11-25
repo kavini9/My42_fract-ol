@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:21:14 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:09:11 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:45:12 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,13 @@ int	main(int argc, char **argv)
 	mlx_loop(frac.mlx);
 	mlx_terminate(frac.mlx);
 	return (EXIT_SUCCESS);
-	return (0);
+}
+
+void	key_ctrls(mlx_key_data_t keydata, void *param)
+{
+	t_fractol	*frac;
+
+	frac = (t_fractol *)param;
+	prog_ctrls(keydata, frac);
+	color_ctrls(keydata, frac);
 }

@@ -6,12 +6,11 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:48:57 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/24 00:37:57 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:38:49 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol_bonus.h"
-#include <stdio.h>
 
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
 {
@@ -26,12 +25,12 @@ void	escape_count(t_fractol *frac)
 	double	cx;
 	double	cy;
 	double	tmp;
-	
-	zx = frac->z.x;
-	zy = frac->z.y;
-	cx = frac->c.x;
-	cy = frac->c.y;
-	while ((zx * zx) + (zy * zy) < 10.0 && frac->n < frac -> max_iter)
+
+	zx = frac -> z.x;
+	zy = frac -> z.y;
+	cx = frac -> c.x;
+	cy = frac -> c.y;
+	while ((zx * zx) + (zy * zy) < 10.0 && frac -> n < frac -> max_iter)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
 		if (!ft_strcmp(frac -> f_set, "burning_ship"))
@@ -39,19 +38,17 @@ void	escape_count(t_fractol *frac)
 		else
 			zy = 2 * zx * zy + cy;
 		zx = tmp;
-		frac->n++;
+		frac -> n++;
 	}
-	tmp = fabs(sqrt((zx * zx) + (zy * zy)));
-	if (tmp >  0)
+	tmp = fabs(sqrt(zx * zx + zy * zy));
+	if (tmp > 1.0 && log(tmp) > 0.0)
 		frac -> mu = frac->n - (log(log(tmp)) / log(2.0));
 	else
-		frac -> mu = 0;
+		frac -> mu = 0.0;
 }
 
 void	julia(int x, int y, t_fractol *frac)
 {
-	double	tmp_zx;
-
 	frac -> n = 0;
 	frac -> mu = 0;
 	pix_to_cmplex(x, y, &(frac -> z), frac);
@@ -61,8 +58,6 @@ void	julia(int x, int y, t_fractol *frac)
 
 void	mandel_n_ship(int x, int y, t_fractol *frac)
 {
-	double	tmp_zx;
-
 	frac -> z.x = 0;
 	frac -> z.y = 0;
 	frac -> n = 0;
@@ -85,13 +80,13 @@ void	fractol_render(t_fractol *frac)
 		{
 			if (!ft_strcmp(frac -> f_set, "julia"))
 				julia(x, y, frac);
-			if (!ft_strcmp(frac -> f_set, "mandelbrot") || 
-				!ft_strcmp(frac -> f_set, "burning_ship"))
+			if (!ft_strcmp(frac -> f_set, "mandelbrot")
+				||!ft_strcmp(frac -> f_set, "burning_ship"))
 				mandel_n_ship(x, y, frac);
 			mlx_put_pixel(frac-> img, x, y, frac -> pix.color);
 			y++;
 		}
 		x++;
 	}
-//	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);
+	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);
 }

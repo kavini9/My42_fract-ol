@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 17:01:23 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:01:39 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:22:00 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	ctrl(mlx_key_data_t keydata, void *param)
 	{
 		mlx_delete_image(frac -> mlx, frac -> img);
 		mlx_close_window(frac -> mlx);
+		ft_putendl_fd("Closed the window", 1);
+		return ;
 	}
+	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+		return (control_guide());
 }
 
 void	zoom(double xdelta, double ydelta, void *param)
@@ -51,28 +55,29 @@ void	zoom(double xdelta, double ydelta, void *param)
 
 void	shift(void *param)
 {
-	double		x_shift_fac;
-	double		y_shift_fac;
+	t_coord		shift_fac;
 	double		xrange;
 	double		yrange;
 	t_fractol	*frac;
 
 	frac = (t_fractol *)param;
+	shift_fac.x = 0.0;
+	shift_fac.y = 0.0;
 	xrange = frac -> max.x - frac -> min.x;
 	yrange = frac -> max.y - frac -> min.y;
 	if (mlx_is_key_down(frac -> mlx, MLX_KEY_RIGHT))
-		x_shift_fac = 0.025;
+		shift_fac.x = 0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_LEFT))
-		x_shift_fac = -0.025;
+		shift_fac.x = -0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_UP))
-		y_shift_fac = 0.025;
+		shift_fac.y = 0.025;
 	else if (mlx_is_key_down(frac -> mlx, MLX_KEY_DOWN))
-		y_shift_fac = -0.025;
+		shift_fac.y = -0.025;
 	else
 		return ;
-	frac -> min.x += xrange * x_shift_fac;
-	frac -> max.x += xrange * x_shift_fac;
-	frac -> min.y += yrange * y_shift_fac;
-	frac -> max.y += yrange * y_shift_fac;
+	frac -> min.x += xrange * shift_fac.x;
+	frac -> max.x += xrange * shift_fac.x;
+	frac -> min.y += yrange * shift_fac.y;
+	frac -> max.y += yrange * shift_fac.y;
 	fractol_render(&(*frac));
 }

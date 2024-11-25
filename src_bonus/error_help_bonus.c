@@ -6,25 +6,25 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 06:46:56 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:10:25 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:25:37 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol_bonus.h"
 
-int	control_guide(void)
+void	control_guide(void)
 {
 	ft_putendl_fd(
 		"<===============================================================>"
 		"\n| \033[4mControl guide\033[0m\t\t\t\t\t\t\t|"
-		"\n| ESC		- Exit program\t\t\t\t\t|"
-		"\n| TAB		- Display control guide\t\t\t\t|"
+		"\n| ESC			- Exit program\t\t\t\t|"
+		"\n| TAB			- Display control guide\t\t\t|"
 		"\n| ARROW_KEYS		- Panning\t\t\t\t|"
-		"\n| \tUP	- Move up\t\t\t\t\t|"
-		"\n| \tDOWN	- Move down\t\t\t\t\t|"
-		"\n| \tRIGHT	- Move right\t\t\t\t\t|"
-		"\n| \tLEFT	- Move left\t\t\t\t\t|"
-		"\n| MOUSE	- Zooming\t\t\t\t\t\t|"
+		"\n| \tUP		- Move up\t\t\t\t|"
+		"\n| \tDOWN		- Move down\t\t\t\t|"
+		"\n| \tRIGHT		- Move right\t\t\t\t|"
+		"\n| \tLEFT		- Move left\t\t\t\t|"
+		"\n| MOUSE			- Zooming\t\t\t\t|"
 		"\n| \tSCROLL_UP	- Zoom in\t\t\t\t|"
 		"\n| \tSCROLL_DOWN	- Zoom out\t\t\t\t|"
 		"\n| Color adjustments\t\t\t\t\t\t|"
@@ -34,9 +34,9 @@ int	control_guide(void)
 		"\n| \tS		- Decrease Saturation\t\t\t|"
 		"\n| \tV + SHIFT	- Increase Brightness\t\t\t|"
 		"\n| \tV		- Decrease Brightness\t\t\t|"
-		"\n| Numpad +	- Increase max iterations\t\t\t|"
-		"\n| Numpad -	- Decrease max iterations\t\t\t|"
-		"\n| R		- Reset color and viewport\t\t\t|"
+		"\n| Numpad +		- Increase max iterations\t\t|"
+		"\n| Numpad -		- Decrease max iterations\t\t|"
+		"\n| R			- Reset color and viewport\t\t|"
 		"\n<===============================================================>",
 		STDERR_FILENO);
 }
@@ -68,7 +68,7 @@ int	arg_guide(char *err_msg)
 		"\n| \t\t-0.4\t0.6\t\t\t\t\t|"
 		"\n| \t\t 0.285\t0.01\t\t\t\t\t|"
 		"\n| \t\t-0.8\t0.156\t\t\t\t\t|"
-		"\n| \t\t-0.7269\t0.1889\t\t\t\t\t|"
+		"\n| \t\t 0.0\t0.8\t\t\t\t\t|"
 		"\n| \t\t-0.835\t0.2321\t\t\t\t\t|"
 		"\n<===============================================================>",
 		STDERR_FILENO);

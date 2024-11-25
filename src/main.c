@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 16:59:53 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:00:05 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:23:47 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ int	main(int argc, char **argv)
 	mlx_loop(frac.mlx);
 	mlx_terminate(frac.mlx);
 	return (EXIT_SUCCESS);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 17:00:34 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:00:50 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:47:07 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	set_julia_c(t_fractol *frac, char **av)
 		|| (frac -> c.y > 2.0 || frac -> c.y < -2.0))
 	{
 		arg_guide("Argument values are out of range.");
-		mlx_terminate(frac -> mlx);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -47,6 +46,8 @@ void	init_fractol(t_fractol *frac, char **av)
 {
 	frac -> f_set = av[1];
 	frac -> max_iter = 100;
+	if (!(ft_strcmp(frac -> f_set, "julia")))
+		set_julia_c(frac, av);
 	frac -> mlx = mlx_init(WIDTH, HEIGHT, frac -> f_set, false);
 	if (!(frac -> mlx))
 	{
@@ -60,8 +61,6 @@ void	init_fractol(t_fractol *frac, char **av)
 		error_out("Image buffer allocation failed.");
 		exit(EXIT_FAILURE);
 	}
-	if (!(ft_strcmp(frac -> f_set, "julia")))
-		set_julia_c(frac, av);
 	set_viewport(frac);
 	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);
 }

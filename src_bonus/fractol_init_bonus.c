@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:02:04 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/24 00:51:59 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:46:55 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	set_color(t_fractol *frac)
 {
-	frac -> pix.h =360.0;
-	frac -> pix.s = 0.70;
-	frac -> pix.v = 1.00;
+	frac -> pix.h = 360.0;
+	frac -> pix.s = 1.00;
+	frac -> pix.v = 0.60;
 	frac -> pix.radi = 10.0;
 	set_palette(&(frac -> pix));
 }
@@ -54,7 +54,6 @@ static void	set_julia_c(t_fractol *frac, char **av)
 		|| (frac -> c.y > 2.0 || frac -> c.y < -2.0))
 	{
 		arg_guide("Argument values are out of range.");
-		mlx_terminate(frac -> mlx);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -63,6 +62,8 @@ void	init_fractol(t_fractol *frac, char **av)
 {
 	frac -> f_set = av[1];
 	frac -> max_iter = 70;
+	if (!(ft_strcmp(frac -> f_set, "julia")))
+		set_julia_c(frac, av);
 	frac -> mlx = mlx_init(WIDTH, HEIGHT, frac -> f_set, false);
 	if (!(frac -> mlx))
 	{
@@ -76,8 +77,6 @@ void	init_fractol(t_fractol *frac, char **av)
 		error_out("Image buffer allocation failed.");
 		exit(EXIT_FAILURE);
 	}
-	if (!(ft_strcmp(frac -> f_set, "julia")))
-		set_julia_c(frac, av);
 	set_viewport(frac);
 	set_color(frac);
 	mlx_image_to_window(frac -> mlx, frac -> img, 0, 0);

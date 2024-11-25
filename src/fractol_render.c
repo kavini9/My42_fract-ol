@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_render.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/24 19:40:01 by wweerasi          #+#    #+#             */
+/*   Updated: 2024/11/25 16:39:10 by wweerasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fractol.h"
 
 void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
@@ -13,44 +25,42 @@ void	escape_count(t_fractol *frac)
 	double	cx;
 	double	cy;
 	double	tmp;
-	
+
 	zx = frac->z.x;
 	zy = frac->z.y;
 	cx = frac->c.x;
 	cy = frac->c.y;
 	frac -> n = 0;
-	frac -> mu = 0;
 	while ((zx * zx) + (zy * zy) < 4.0 && frac->n < frac -> max_iter)
 	{
 		tmp = (zx * zx) - (zy * zy) + cx;
 		zy = 2 * zx * zy + cy;
 		zx = tmp;
-		frac->n++;
+		frac -> n++;
 	}
-	tmp = sqrt((zx * zx) + (zy * zy));
-	frac -> mu = frac -> n - (log(log(tmp)) / log(2.0));
+	tmp = fabs(sqrt(zx * zx + zy * zy));
+	if (tmp > 1.0 && log(tmp) > 0.0)
+		frac -> mu = frac->n - (log(log(tmp)) / log(2.0));
+	else
+		frac -> mu = 0.0;
 }
 
 void	julia(int x, int y, t_fractol *frac)
 {
-	double	tmp_zx;
-
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> z), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n);
+	get_color(frac, frac -> n, frac -> mu);
 }
 
 void	mandelbrot(int x, int y, t_fractol *frac)
 {
-	double	tmp_zx;
-
 	frac -> z.x = 0;
 	frac -> z.y = 0;
 	frac -> n = 0;
 	pix_to_cmplex(x, y, &(frac -> c), frac);
 	escape_count(frac);
-	get_color(&(frac -> pix), frac -> n);
+	get_color(frac, frac -> n, frac -> mu);
 }
 
 void	fractol_render(t_fractol *frac)

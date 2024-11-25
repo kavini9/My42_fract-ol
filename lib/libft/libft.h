@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:13:14 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/22 14:55:09 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:48:05 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -57,7 +57,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_lstsize(t_list *lst);
 int		ft_atoi(const char *str);
 
-double		ft_atof(const char *str);
+double	ft_atof(const char *str);
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
