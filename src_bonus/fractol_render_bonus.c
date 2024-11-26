@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:48:57 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/25 16:38:49 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:00:32 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pix_to_cmplex(int x, int y, t_coord *p, t_fractol *frac)
 	p -> y = frac -> max.y - (frac -> max.y - frac -> min.y) / HEIGHT * y;
 }
 
-void	escape_count(t_fractol *frac)
+static void	escape_count(t_fractol *frac)
 {
 	double	zx;
 	double	zy;
@@ -47,7 +47,7 @@ void	escape_count(t_fractol *frac)
 		frac -> mu = 0.0;
 }
 
-void	julia(int x, int y, t_fractol *frac)
+static void	julia(int x, int y, t_fractol *frac)
 {
 	frac -> n = 0;
 	frac -> mu = 0;
@@ -56,7 +56,7 @@ void	julia(int x, int y, t_fractol *frac)
 	get_color(frac, frac -> n, frac -> mu);
 }
 
-void	mandel_n_ship(int x, int y, t_fractol *frac)
+static void	mandel_n_ship(int x, int y, t_fractol *frac)
 {
 	frac -> z.x = 0;
 	frac -> z.y = 0;

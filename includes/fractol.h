@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 07:41:25 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/25 17:45:46 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:39:35 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,10 @@ typedef struct s_coord
 
 typedef struct s_color
 {
-	double		h;
-	double		s;
-	double		v;
 	double		r;
 	double		g;
 	double		b;
-	uint32_t	a;
 	uint32_t	color;
-	uint8_t		radi;
 }	t_color;
 
 typedef struct s_fractol

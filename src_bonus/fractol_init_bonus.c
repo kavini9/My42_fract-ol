@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:02:04 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/25 16:46:55 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:58:47 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	set_color(t_fractol *frac)
 	frac -> pix.h = 360.0;
 	frac -> pix.s = 1.00;
 	frac -> pix.v = 0.60;
-	frac -> pix.radi = 10.0;
 	set_palette(&(frac -> pix));
 }
 

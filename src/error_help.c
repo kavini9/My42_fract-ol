@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 19:39:45 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/25 17:06:58 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:50:55 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	arg_guide(char *err_msg)
 		"\n| <fractal_set>:\t\t\t\t\t\t|"
 		"\n| \tmandelbrot\t\t\t\t\t\t|"
 		"\n| \tjulia\t\t\t\t\t\t\t|"
-		"\n| \tsomething\t\t\t\t\t\t|"
 		"\n| Notes:\t\t\t\t\t\t\t|"
 		"\n| \t- Re(c) and Im(c) are required only for the julia set.	|"
 		"\n| \tThey are not needed for other fractal sets.\t\t|"
@@ -62,5 +61,5 @@ int	arg_guide(char *err_msg)
 		"\n| \t\t-0.835\t0.2321\t\t\t\t\t|"
 		"\n<===============================================================>",
 		STDERR_FILENO);
-	return (0);
+	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:54:21 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/23 17:14:14 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:19:05 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol_bonus.h"
 
-int	is_float(char *str)
+static int	is_float(char *str)
 {
 	int	dec_flag;
 	int	digit_count;
@@ -42,12 +42,13 @@ int	is_valid(int ac, char **av)
 {
 	if (ac < 2 || ac == 3 || ac > 4)
 		return (arg_guide("Invalid number of arguments"));
-	if (!ft_strcmp(av[1], "mandelbrot") || !ft_strcmp(av[1], "burning_ship"))
+	if (!ft_strcmp(av[1], "mandelbrot")
+		|| !ft_strcmp(av[1], "burning_ship"))
 	{
 		if (ac != 2)
 			return (arg_guide("Invalid number of arguments"));
 		else
-			return (1);
+			return (0);
 	}
 	else if (!ft_strcmp(av[1], "julia"))
 	{
@@ -58,7 +59,7 @@ int	is_valid(int ac, char **av)
 			if (!is_float(av[2]) || !is_float(av[3]))
 				return (arg_guide("Invalid argument type."));
 			else
-				return (1);
+				return (0);
 		}
 	}
 	else

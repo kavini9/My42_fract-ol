@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 06:46:56 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/25 17:25:37 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:32:45 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	arg_guide(char *err_msg)
 {
 	error_out(err_msg);
 	ft_putendl_fd(
-		"\n Usage:  ./fractol  <fractal_set>  <Re(c)>  <Im(c)>"
+		"\n Usage:  ./fractol_bonus  <fractal_set>  <Re(c)>  <Im(c)>"
 		"\n<===============================================================>"
 		"\n| \033[4mfractol argument reference\033[0m\t\t\t\t\t|"
 		"\n| <fractal_set>:\t\t\t\t\t\t|"
@@ -72,5 +72,5 @@ int	arg_guide(char *err_msg)
 		"\n| \t\t-0.835\t0.2321\t\t\t\t\t|"
 		"\n<===============================================================>",
 		STDERR_FILENO);
-	return (0);
+	return (1);
 }

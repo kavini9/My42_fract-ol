@@ -6,18 +6,21 @@
 #    By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 20:45:47 by wweerasi          #+#    #+#              #
-#    Updated: 2024/11/25 17:54:03 by wweerasi         ###   ########.fr        #
+#    Updated: 2024/11/26 19:23:04 by wweerasi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-DIR_MLX = ./lib/MLX42
-DIR_LIBFT = ./lib/libft
-DIR_SRC = ./src
-DIR_SRC_BONUS = ./src_bonus
-DIR_OBJ = $(DIR_SRC)/objects
-DIR_OBJ_BONUS = $(DIR_SRC_BONUS)/objects_bonus
+DIR_MLX		= ./lib/MLX42
+DIR_LIBFT	= ./lib/libft
+DIR_SRC		= ./src
+DIR_SRC_BONUS	= ./src_bonus
+DIR_OBJ		= $(DIR_SRC)/objects
+DIR_OBJ_BONUS	= $(DIR_SRC_BONUS)/objects_bonus
+DIR_INC		= ./includes
+HEADERS		= $(DIR_INC)/fractol.h
+HEADERS_BONUS	= $(DIR_INC)/fractol_bonus.h
 
 SOURCES = main.c \
 	  arg_validate.c \
@@ -35,27 +38,23 @@ SOURCES_BONUS = main_bonus.c \
 	  fractol_render_bonus.c  \
 	  color_generate_bonus.c \
 
-SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
-SRC_BONUS = $(addprefix $(DIR_SRC_BONUS)/,$(SOURCES_BONUS))
+OBJECTS		= $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
+OBJECTS_BONUS 	= $(addprefix $(DIR_OBJ_BONUS)/,$(SOURCES_BONUS:.c=.o))
 
-OBJECTS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
-OBJECTS_BONUS = $(addprefix $(DIR_OBJ_BONUS)/,$(SOURCES_BONUS:.c=.o))
+LIBMLX		= $(DIR_MLX)/build/libmlx42.a
 
-HEADERS = -I ./include -I $(DIR_MLX)/include -I $(DIR_LIBFT)
-HEADERS_BONUS = -I ./include_bonus -I $(DIR_MLX)/include -I $(DIR_LIBFT)
+LIBMLX_FLAGS	= $(LIBMLX) -ldl -lglfw -lm
+LIBFT_FLAGS	= -L $(DIR_LIBFT) -lft
 
-LIBMLX = $(DIR_MLX)/build/libmlx42.a
-LIBFT = $(DIR_LIBFT)/libft.a
+CC		= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM		= rm -rf
 
-LIBMLX_FLAGS = $(DIR_MLX)/build/libmlx42.a -ldl -lglfw -lm
-LIBFT_FLAGS = -L $(DIR_LIBFT) -lft
+all: libft $(LIBMLX) $(NAME)
+bonus: libft $(LIBMLX) .bonus
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-
-RM = rm -rf
-
-all: $(LIBFT) $(LIBMLX) $(NAME)
+libft:
+	@make -C $(DIR_LIBFT)
 
 $(LIBMLX):
 	@if [ ! -d $(DIR_MLX) ]; then \
@@ -66,40 +65,38 @@ $(LIBMLX):
 		cmake $(DIR_MLX) -B $(DIR_MLX)/build && make -C $(DIR_MLX)/build -j4; \
 	fi
 
-
-$(LIBFT):
-	@make -C $(DIR_LIBFT)
-
 $(NAME): $(OBJECTS)
-	@$(CC) $(OBJECTS) $(LIBFT_FLAGS) $(LIBMLX) $(LIBMLX_FLAGS) $(HEADERS) -o $@
+	$(CC) $(OBJECTS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -o $@
 
-$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c | $(DIR_OBJ)
-	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+.bonus: $(OBJECTS_BONUS)
+	$(CC) $(OBJECTS_BONUS) $(LIBFT_FLAGS) $(LIBMLX_FLAGS) -o $(NAME)_bonus
+	@touch .bonus
+
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HEADERS) | $(DIR_OBJ)
+	@$(CC) $(CFLAGS) -I$(DIR_INC) -c $< -o $@
+
+$(DIR_OBJ_BONUS)/%.o: $(DIR_SRC_BONUS)/%.c $(HEADERS_BONUS) | $(DIR_OBJ_BONUS)
+	@$(CC) $(CFLAGS) -I$(DIR_INC) -c $< -o $@
 
 $(DIR_OBJ):
 	@mkdir -p $(DIR_OBJ)
-
-bonus: $(LIBFT) $(LIBMLX) $(OBJECTS_BONUS)
-	@$(CC) $(OBJECTS_BONUS) $(LIBFT_FLAGS) $(LIBMLX) $(LIBMLX_FLAGS) $(HEADERS_BONUS) -o $(NAME)_bonus
-
-$(DIR_OBJ_BONUS)/%.o: $(DIR_SRC_BONUS)/%.c | $(DIR_OBJ_BONUS)
-	@$(CC) $(CFLAGS) $(HEADERS_BONUS) -c $< -o $@
 
 $(DIR_OBJ_BONUS):
 	@mkdir -p $(DIR_OBJ_BONUS)
 
 clean:
-	@$(RM) $(DIR_OBJ)
+	@$(RM) $(DIR_OBJ) 
 	@$(RM) $(DIR_OBJ_BONUS)
 	@$(RM) $(DIR_MLX)/build
 	@make -C $(DIR_LIBFT) clean
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) .bonus
+	@$(RM) $(NAME) 
 	@$(RM) $(NAME)_bonus
 	@$(RM) $(DIR_MLX)
 	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus libft clean fclean re

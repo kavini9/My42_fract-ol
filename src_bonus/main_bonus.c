@@ -6,7 +6,7 @@
 /*   By: wweerasi <wweerasi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:21:14 by wweerasi          #+#    #+#             */
-/*   Updated: 2024/11/24 20:45:12 by wweerasi         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:01:18 by wweerasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_fractol	frac;
 
-	if (!is_valid(argc, argv))
+	if (is_valid(argc, argv))
 		exit(EXIT_FAILURE);
 	init_fractol(&frac, argv);
 	fractol_render(&frac);
