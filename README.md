@@ -8,7 +8,7 @@
 https://github.com/user-attachments/assets/bdcc5214-3701-4362-b99a-f695c8c0ee2f
 
 
-![Screenshot from 2024-11-26 22-09-18](https://github.com/user-attachments/assets/d19595e4-1bfb-4078-b6cb-2a5018572d5d)
+
 ![Screenshot from 2024-11-26 22-24-59](https://github.com/user-attachments/assets/ccb8cc83-c1e7-40e2-878e-dca3b94e2af9)
 ![Screenshot from 2024-11-24 22-07-33](https://github.com/user-attachments/assets/5803eac2-fe65-442d-9e5a-b98fabbfbb4f)
 [Screencast from 11-26-2024 10:15:38 PM.webm](https://github.com/user-attachments/assets/df48d8c0-1dda-46fc-aeba-0297c57887e7)
